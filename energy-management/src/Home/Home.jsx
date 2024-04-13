@@ -1,9 +1,9 @@
-import VerticalNavbar from './components/VerticalNavbar';
-import CarouselBar from './components/CarouselBar';
-import ChartTest from './components/ChartTest';
-import SuggestionsBox from './components/SuggestionsBox';
-import HorizontalNavbar from './components/HorizontalNavbar';
-import './App.css';
+import VerticalNavbar from '../components/VerticalNavbar';
+import HorizontalNavbar from '../components/HorizontalNavbar';
+import CarouselBar from './CarouselBar';
+import ChartTest from './ChartTest';
+import SuggestionsBox from './SuggestionsBox';
+import '../App.css';
 
 export default function App() {
     return (
