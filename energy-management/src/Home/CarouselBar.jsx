@@ -4,9 +4,9 @@ import myImage from '../../assets/image.png';
 import Water from '../../assets/ATbrrkLac.png';
 import Sun from '../../assets/sun.png';
 import '../App.css';
+
 const CarouselBar = () => {
     const slides = [
-
         <div className="grid grid-cols-3 bg-myblack rounded-md m-2 h-full">
             <div className="col-span-3 font-roboto font-bold text-white text-4xl pl-4 pt-4 pb-4">Energy Cost</div>
             <img src={myImage} alt="My Image" className="animate-pulse row-span-2 electricity-hover" />

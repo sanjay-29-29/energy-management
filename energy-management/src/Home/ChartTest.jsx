@@ -1,6 +1,9 @@
 import { useContext, useState, useEffect, useRef } from 'react';
+import Chart from 'chart.js/auto';
 import { DataContext } from '../DataContext';
 import { Line } from 'react-chartjs-2';
+import zoomPlugin from 'chartjs-plugin-zoom';
+import 'chartjs-adapter-date-fns';
 
 function ChartTest() {
   const data = useContext(DataContext);
@@ -27,6 +30,7 @@ function ChartTest() {
       chartInstance.options.scales.x.time.min = labels.length > 10 ? labels[labels.length - 10] : labels[0];
       chartInstance.options.scales.x.time.max = labels[labels.length - 1];
   
+      // Update the chart
       chartInstance.update();
     }
   }, [labels, energyCost]);
