@@ -12,11 +12,11 @@ const CarouselBar = () => {
             <img src={myImage} alt="My Image" className="animate-pulse row-span-2 electricity-hover" />
             <div className='px-2 text-white text-2xl font-roboto font-bold'>
                 <div >Total Cost</div>
-                <div>$0.00M</div>
+                <div>Rs.1042424</div>
             </div>
             <div className='px-2 text-white text-2xl font-roboto font-bold'>
                 <div >This Month</div>
-                <div>$0.00M</div>
+                <div>Rs.4213</div>
             </div>
             <div className='px-2 text-white text-2xl font-roboto font-bold'>
                 <div >This Year</div>

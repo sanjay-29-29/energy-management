@@ -23,17 +23,20 @@ export default function Energy() {
           <VerticalNavbar />
           <div className="flex flex-col w-full h-screen overflow-y-auto">
             <HorizontalNavbar />
-            <div className='flex flex-col m-4 rounded-lg px-6 h-screen'>
+            <div className='flex flex-col m-4 rounded-lg px-6'>
+              
               <div className='pb-5 flex items-start font-roboto font-bold text-5xl text-white'>
                 <img src={myImage} alt="My Image" className="animate-pulse row-span-2 electricity-hover w-[50px] h-[50px]" />
                 Energy
               </div>
+              
               <div className='flex flex-row items-start py-4 pb-4 px-4'>
                 <button className={`text-white font-roboto font-bold px-4 rounded-lg ${currentButton === 'overview' ? 'highlight' : ''}`} onClick={() => handleClick(<EnergyOverviewChart/>, 'overview')}>Overview</button>
                 <div className='px-4'></div>
                 <button className={`text-white font-roboto font-bold px-4 rounded-lg ${currentButton === 'prediction' ? 'highlight' : ''}`} onClick={() => handleClick(<EnergyPredictedChart/>, 'prediction')}>Prediction</button>
                 <div className='py-6'></div>
               </div>
+
               {currentComponent}
             </div>
           </div>
