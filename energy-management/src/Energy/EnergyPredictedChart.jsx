@@ -1,30 +1,60 @@
 import { Line } from 'react-chartjs-2';
 import { DataContext } from '../DataContext';
 import { useContext, useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 
 function EnergyPredictedChart() {
 
+    const firstUpdate = useRef(true);
     const data = useContext(DataContext);
-    const [energyCost, setEnergyCost] = useState([]);
     const [labels, setLabels] = useState([]);
+    const [currentData, setCurrentData] = useState([]);
+    const [predictedData, setPredictedData] = useState([]);
 
     useEffect(() => {
-        if (data.length > 0) {
-          const newEnergyCost = [...energyCost, data[0].Total].slice(-10);
-          const newLabels = [...labels, data[0].Time].slice(-10);
-          setEnergyCost(newEnergyCost);
-          setLabels(newLabels);
+        if (firstUpdate.current) {
+          firstUpdate.current = false;
+          return;
         }
-      }, [data]);
+      
+        axios.get('http://127.0.0.1:8000/get_current')
+          .then(response => {
+            const newData = response.data;
+            const newEnergyCost = newData.map(item => item.Total);
+            setCurrentData(newEnergyCost);
+            setLabels(newLabels);
+          })
+          .catch(error => {
+            console.error('Error fetching data: ', error);
+          });
+      
+        axios.get('http://127.0.0.1:8000/get_predicted')
+          .then(response => {
+            const newData = response.data;
+            const newEnergyCost = newData.map(item => item.Total);
+            const newLabels = newData.map(item => item.Time);
+            setPredictedData(newEnergyCost);
+            setLabels(newLabels);
+          })
+          .catch(error => {
+            console.error('Error fetching data: ', error);
+          });
+      }, []);
 
-      const total_data_chart = {
+    const total_data_chart = {
         labels: labels,
         datasets: [
             {
                 label: 'Energy Usage(in kw/h)',
                 backgroundColor: 'skyblue',
                 borderColor: 'skyblue',
-                data: energyCost,
+                data: currentData,
+            },
+            {
+                label: 'Predicted Energy Usage(in kw/h)',
+                backgroundColor: 'yellow',
+                borderColor: 'yellow',
+                data: predictedData,
             }
         ]
     };
@@ -41,10 +71,10 @@ function EnergyPredictedChart() {
             x: {
                 type: 'time',
                 time: {
-                    parser: 'yyyy-MM-dd HH:mm:ss',
-                    unit: 'second',
+                    parser: 'yyyy-MM-dd',
+                    unit: 'day',
                     displayFormats: {
-                        minute: 'HH mm'
+                        month: 'dd'
                     }
                 },
                 title: {
@@ -70,14 +100,8 @@ function EnergyPredictedChart() {
 
     return (
         <>
-            <div className='grid grid-cols-2 h-[60vh] gap-4'>
-                <div className='bg-myblack rounded-lg'>
-                    <div className='font-roboto font-bold text-4xl text-white px-4 py-4'>
-                        Total Energy Usage
-                    </div>
-                        <Line data={total_data_chart} options={options} />
-                </div>
-                <div className='bg-myblack rounded-lg'>
+            <div className='grid grid-cols-2 h-[20vh] flex items-center justify-center'>
+                <div className='col-span- bg-myblack rounded-lg'>
                     <div className='font-roboto font-bold text-4xl text-white px-4 py-4'>
                         Predicted Energy Usage
                     </div>

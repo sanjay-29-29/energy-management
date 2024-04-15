@@ -30,7 +30,6 @@ function ChartTest() {
       chartInstance.options.scales.x.time.min = labels.length > 10 ? labels[labels.length - 10] : labels[0];
       chartInstance.options.scales.x.time.max = labels[labels.length - 1];
   
-      // Update the chart
       chartInstance.update();
     }
   }, [labels, energyCost]);
@@ -44,18 +43,6 @@ function ChartTest() {
         borderColor: 'yellow',
         data: energyCost,
       },
-            {
-                label : 'Water Cost',
-                backgroundColor: 'blue',
-                borderColor: 'blue',
-                data: [0, 5, 10, 15, 20, 25, 30]
-            },
-            {
-                label : 'Solar',
-                backgroundColor: 'green',
-                borderColor: 'green',
-                data: [0, 5, 10, 15, 25, 25, 30]
-            }
         ]
     };
 
@@ -66,9 +53,9 @@ function ChartTest() {
             type: 'time',
             time: {
               parser: 'yyyy-MM-dd HH:mm:ss',
-              unit: 'second',
+              unit: 'hour',
               displayFormats: {
-                minute: 'HH mm'
+                day: 'HH'
               },
               min: labels.length > 10 ? labels[labels.length - 10] : labels[0],
               max: labels[labels.length - 1],

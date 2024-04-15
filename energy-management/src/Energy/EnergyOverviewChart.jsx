@@ -56,7 +56,7 @@ function EnergyOverviewChart() {
         labels: labels,
         datasets: [
             {
-                label: 'S&H(in kw/h)',
+                label: 'ECE(in kw/h)',
                 backgroundColor: 'yellow',
                 borderColor: 'yellow',
                 data: ECEenergyCost,
@@ -67,7 +67,7 @@ function EnergyOverviewChart() {
         labels: labels,
         datasets: [
             {
-                label: 'S&H(in kw/h)',
+                label: 'EEE(in kw/h)',
                 backgroundColor: 'purple',
                 borderColor: 'purple',
                 data: EEEenergyCost,
@@ -78,7 +78,7 @@ function EnergyOverviewChart() {
         labels: labels,
         datasets: [
             {
-                label: 'S&H(in kw/h)',
+                label: 'AUTO(in kw/h)',
                 backgroundColor: 'gray',
                 borderColor: 'gray',
                 data: AUTOenergyCost,
@@ -89,7 +89,7 @@ function EnergyOverviewChart() {
         labels: labels,
         datasets: [
             {
-                label: 'S&H(in kw/h)',
+                label: 'CSE(in kw/h)',
                 backgroundColor: 'cyan',
                 borderColor: 'cyan',
                 data: CSEenergyCost,
@@ -100,7 +100,7 @@ function EnergyOverviewChart() {
         labels: labels,
         datasets: [
             {
-                label: 'S&H(in kw/h)',
+                label: 'CT(in kw/h)',
                 backgroundColor: 'violet',
                 borderColor: 'violet',
                 data: CTenergyCost,
@@ -121,9 +121,9 @@ function EnergyOverviewChart() {
                 type: 'time',
                 time: {
                     parser: 'yyyy-MM-dd HH:mm:ss',
-                    unit: 'second',
+                    unit: 'hour',
                     displayFormats: {
-                        minute: 'HH mm'
+                        day: 'HH'
                     }
                 },
                 title: {
