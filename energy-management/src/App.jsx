@@ -6,7 +6,7 @@ import dataFetcher from './DataFetcher';
 import { DataContext } from './DataContext';
 
 export default function App() {
-  const data = dataFetcher();
+  const data = [];
   return (
     <DataContext.Provider value={data}>
       <Router>

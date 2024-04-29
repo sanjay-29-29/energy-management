@@ -5,3 +5,29 @@
 body {
   background-color: black;
 }
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  color: #fff;
+}
+
+.react-datepicker {
+  background-color: #2d2d2d;
+}
+
+.react-datepicker__header {
+  background-color: #1a1a1a;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range {
+  background-color: #f00;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: #fff;
+}

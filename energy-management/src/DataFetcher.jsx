@@ -19,7 +19,7 @@ function dataFetcher() {
         .catch(error => {
           console.error('Error fetching data: ', error);
         });
-    }, 1000);  
+    },1000);  
     return () => clearInterval(intervalId);
   });
 
