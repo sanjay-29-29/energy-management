@@ -17,10 +17,11 @@ function EnergyPredictedChart() {
           return;
         }
       
-        axios.get('http://127.0.0.1:8000/get_current')
+        axios.get('http://127.0.0.1:8000/get_total_energy')
           .then(response => {
             const newData = response.data;
             const newEnergyCost = newData.map(item => item.Total);
+            const newLabels = newData.map(item => item.Time);
             setCurrentData(newEnergyCost);
             setLabels(newLabels);
           })
@@ -28,13 +29,11 @@ function EnergyPredictedChart() {
             console.error('Error fetching data: ', error);
           });
       
-        axios.get('http://127.0.0.1:8000/get_predicted')
+        axios.get('http://127.0.0.1:8000/get_predicted_energy')
           .then(response => {
             const newData = response.data;
-            const newEnergyCost = newData.map(item => item.Total);
-            const newLabels = newData.map(item => item.Time);
+            const newEnergyCost = newData.map(item => item.Actual);
             setPredictedData(newEnergyCost);
-            setLabels(newLabels);
           })
           .catch(error => {
             console.error('Error fetching data: ', error);

@@ -1,24 +1,32 @@
+import React, {useState, useEffect} from 'react';
+
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
+
 import myImage from '../../assets/image.png';
 import Water from '../../assets/ATbrrkLac.png';
 import Sun from '../../assets/sun.png';
 import '../App.css';
 
-const CarouselBar = () => {
+function CarouselBar() {
+
+    const [energyCost, setTotalEnergyCost] = useState(0);
+    const [waterCost, setTotalWaterCost] = useState(0);
+    const [solarCost, setTotalSolarCost] = useState(0);
+
     const slides = [
         <div className="grid grid-cols-3 bg-myblack rounded-md m-2 h-full">
             <div className="col-span-3 font-roboto font-bold text-white text-4xl pl-4 pt-4 pb-4">Energy Cost</div>
             <img src={myImage} alt="My Image" className="animate-pulse row-span-2 electricity-hover" />
             <div className='px-2 text-white text-2xl font-roboto font-bold'>
                 <div >Total Cost</div>
-                <div>Rs.1042424</div>
+                <div>Rs.{energyCost}</div>
             </div>
             <div className='px-2 text-white text-2xl font-roboto font-bold'>
                 <div >This Month</div>
                 <div>Rs.4213</div>
             </div>
-            <div className='px-2 text-white text-2xl font-roboto font-bold'>
+            <div className='px-2 text-white text-2xl font-roboto font-bold'>             
                 <div >This Year</div>
                 <div>$0.00M</div>
             </div>
@@ -30,10 +38,10 @@ const CarouselBar = () => {
 
         <div className="grid grid-cols-3 bg-myblack rounded-md m-2 h-full">
             <div className="col-span-3 font-roboto font-bold text-white text-4xl pl-4 pt-4 pb-4">Water Cost</div>
-            <img src={Water} alt="My Image" className="animate-bounce row-span-2 water-hover" />
+            <img src={Water} alt="My Image" className="row-span-2 water-hover" />
             <div className='px-2 text-white text-2xl font-roboto font-bold'>
                 <div >Total Cost</div>
-                <div>$0.00M</div>
+                <div >Rs.{waterCost}</div>
             </div>
             <div className='px-2 text-white text-2xl font-roboto font-bold'>
                 <div >This Month</div>
@@ -53,8 +61,8 @@ const CarouselBar = () => {
             <div className="col-span-3 font-roboto font-bold text-white text-4xl pl-4 pt-4 pb-4">Solar</div>
             <img src={Sun} alt="My Image" className="animate-spin-slow row-span-2" />
             <div className='px-2 text-white text-2xl font-roboto font-bold'>
-                <div >Total Cost</div>
-                <div>$0.00M</div>
+                <div>This Month</div>
+                <div >Rs.{solarCost}</div>
             </div>
             <div className='px-2 text-white text-2xl font-roboto font-bold'>
                 <div >This Month</div>
@@ -99,6 +107,8 @@ const CarouselBar = () => {
             </div>
         </div>
     )
+
 }
+
 
 export default CarouselBar;
