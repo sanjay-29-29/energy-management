@@ -1,8 +1,8 @@
 import VerticalNavbar from '../components/VerticalNavbar';
 import HorizontalNavbar from '../components/HorizontalNavbar';
-import CarouselBar from './CarouselBar';
+import Tile from './Tile';
 import ChartTest from './ChartTest';
-import SolarChart from './SolarChart';
+import HomePieChart from './HomePieChart';
 import '../App.css';
 
 export default function App() {
@@ -12,9 +12,17 @@ export default function App() {
                 <VerticalNavbar />
                 <div className="flex flex-col w-full overflow-y-auto">
                     <HorizontalNavbar />
-                    <CarouselBar />
+                    <Tile />
+                    <div className='ml-4 grid grid-cols-2 gap-2 mr-4'>
+                        <div className='h-[60vh] w-full bg-white rounded-lg'>
+                        <ChartTest />
+                        </div>
+                        <HomePieChart/>
+                    </div>
                 </div>
+
             </div>
+
         </>
     );
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
-import zoomPlugin from 'chartjs-plugin-zoom';
 import 'chartjs-adapter-date-fns';
 import { supabase } from '../Database/db';
 
@@ -8,7 +7,6 @@ function SolarChart() {
     const [data, setData] = useState([]);
     const [labels, setLabels] = useState([]);
     const [energyCost, setEnergyCost] = useState([]);
-    const chartRef = useRef(null);
   
     useEffect(() => {
       async function fetchData() {

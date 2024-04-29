@@ -10,96 +10,135 @@ function ChartTest() {
   const [data, setData] = useState([]);
   const [labels, setLabels] = useState([]);
   const [energyCost, setEnergyCost] = useState([]);
-  const chartRef = useRef(null);
+
+  const [selectedInterval, setSelectedInterval] = useState('Past Week');
+  const [selectedTable, setSelectedTable] = useState('Electricity');
+
+  const chartRef = useRef(null); 
+
+  const TimeInterval = {
+    "Past Week": "2024-04-19",
+    "Past 3 Months": "2024-01-26",
+    "Past Month": "2024-03-26",
+  };
+
+  const Table = {
+    "Electricity": "totalenergycost",
+    "Solar": "totalsolarcost",
+  }
 
   useEffect(() => {
     async function fetchData() {
       const today = '2024-04-26';
-      const sevenDaysAgo = '2024-04-19';
-  
+
       const { data: totalenergy, error } = await supabase
-        .from('totalenergycost')
+        .from(Table[selectedTable])
         .select('Date, Total')
-        .gte('Date', sevenDaysAgo)
+        .gte('Date', TimeInterval[selectedInterval])
         .lte('Date', today);
-  
-      if (error) {
-        console.error('Error fetching data:', error);
-      } else if (totalenergy) {
-        const parsedData = totalenergy.map(item => ({
-          ...item,
-          Date: new Date(item.Date),
-        }));
-  
-        setData(parsedData);
+
+      if (chartRef.current) {
+        chartRef.current.data.labels = labels;
+        chartRef.current.data.datasets[0].data = data;
+        chartRef.current.update();
       }
+
+    if (error) {
+      console.error('Error fetching data:', error);
+    } else if (totalenergy) {
+      const parsedData = totalenergy.map(item => ({
+        ...item,
+        Date: new Date(item.Date),
+      }));
+      setData(parsedData);
     }
-  
+  }
     fetchData();
-  }, []);
-  
-  console.log(data);
+}, [selectedTable, selectedInterval]);
 
-  useEffect(() => {
-    if (data && data.length > 0) {
-      const labels = data.map((item) => item.Date);
-      const energyCost = data.map((item) => item.Total);
+console.log(data);
 
-      setLabels(labels);
-      setEnergyCost(energyCost);
-    }
-  }, [data]);
+useEffect(() => {
+  if (data && data.length > 0) {
+    const labels = data.map((item) => item.Date);
+    const energyCost = data.map((item) => item.Total);
 
-  const data_chart = {
-    labels: labels,
-    datasets: [
-      {
-        label: 'Energy Usage(in kw/h)',
-        backgroundColor: 'yellow',
-        borderColor: 'yellow',
-        data: energyCost,
-      },
-    ]
-  };
+    setLabels(labels);
+    setEnergyCost(energyCost);
+  }
+}, [data]);
 
-  const options = {
-    showLines: true,
-    scales: {
-      x: {
-        type: 'time',
-        time: {
-          parser: 'yyyy-MM-dd',
-          unit: 'day',
-          displayFormats: {
-            day: 'dd/MM/yyyy'
-          },
-        },
-        title: {
-          display: true,
-          text: 'Time'
-        },
-        grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
+const data_chart = {
+  labels: labels,
+  datasets: [
+    {
+      label: 'Energy Usage(in kw/h)',
+      data: energyCost,
+      fill: true,
+      backgroundColor: 'rgba(173, 216, 230, 0.2)',
+      borderColor: '#89CFF0',
+      tension: 0.1
+    },
+  ]
+};
+
+const options = {
+  showLines: true,
+  scales: {
+    x: {
+      type: 'time',
+      time: {
+        parser: 'yyyy-MM-dd',
+        unit: 'day',
+        displayFormats: {
+          day: 'dd/MM/yyyy'
         },
       },
-      y: {
-        title: {
-          display: true,
-          text: 'Energy Usage(in kw/h)'
-        },
-        grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
-          lineWidth: 1
-        }
-      }
+      title: {
+        display: true,
+        text: 'Time'
+      },
+      grid: {
+        color: 'rgba(0, 0, 0, 0)', 
+      },
+    },
+    y: {
+      title: {
+        display: true,
+        text: 'Energy Usage(in kw/h)'
+      },
     }
-  };
+  }
+};
 
-  return (
-    <div className='h-full w-full font-bold font-roboto'>
-      <Line data={data_chart} options={options} />
+return (
+  <>
+    <div className='h-full w-full font-bold'>
+      <div className='text-md pl-2 pt-2'>ENERGY USAGE</div>
+      <div className='text-sm'>
+        <div className='m-2 flex flex-row'>
+          <select
+            className='rounded border border-white bg-colombia px-2'
+            value={selectedTable}
+            onChange={(e) => setSelectedTable(e.target.value)}>
+            <option value='Electricity'>ELECTRICITY</option>
+            <option value='Solar'>SOLAR</option>
+          </select>
+          <select
+            className='rounded border border-white'
+            value={selectedInterval}
+            onChange={(e) => setSelectedInterval(e.target.value)}
+          >
+            <option value='Past Week'>Past Week</option>
+            <option value='Past 3 Months'>Past 3 Months</option>
+            <option value='Past Month'>Past Month</option>
+          </select>
+        </div>
+      </div>
+      <Line ref={chartRef} data={data_chart} options={options} />
     </div>
-  );
+  </>
+);
 }
 
 export default ChartTest;
