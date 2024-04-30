@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBolt, faHome, faDroplet } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faBarChart, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const VerticalNavbar = () => {
   const navigate = useNavigate();
@@ -11,10 +11,10 @@ const VerticalNavbar = () => {
         <button onClick={() => navigate('/')}><FontAwesomeIcon icon={faHome} color='black' size='1x' /></button>
       </div>
       <div className='py-6'>
-        <button onClick={() => navigate('/energy')}><FontAwesomeIcon icon={faBolt} color='black' size='1x' /></button>
+        <button onClick={() => navigate('/prediction')}><FontAwesomeIcon icon={faBarChart} color='black' size='1x' /></button>
       </div>
       <div className=''>
-        <button onClick={() => navigate('/water')}><FontAwesomeIcon icon={faDroplet} color='black' size='1x'/></button>
+        <button onClick={() => navigate('/form')}><FontAwesomeIcon icon={faPlus} color='black' size='1x' /></button>
       </div>
     </div>
   );

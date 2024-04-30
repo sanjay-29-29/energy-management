@@ -1,12 +1,11 @@
-import { useContext, useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import { DataContext } from '../DataContext';
 import { Line } from 'react-chartjs-2';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import 'chartjs-adapter-date-fns';
 import { supabase } from '../Database/db';
 
-function ChartTest() {
+function HomeChart() {
   const [data, setData] = useState([]);
   const [labels, setLabels] = useState([]);
   const [energyCost, setEnergyCost] = useState([]);
@@ -55,8 +54,6 @@ function ChartTest() {
   }
     fetchData();
 }, [selectedTable, selectedInterval]);
-
-console.log(data);
 
 useEffect(() => {
   if (data && data.length > 0) {
@@ -141,4 +138,4 @@ return (
 );
 }
 
-export default ChartTest;
+export default HomeChart;
