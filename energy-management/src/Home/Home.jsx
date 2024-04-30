@@ -1,7 +1,7 @@
 import VerticalNavbar from '../components/VerticalNavbar';
 import HorizontalNavbar from '../components/HorizontalNavbar';
 import Tile from './Tile';
-import ChartTest from './ChartTest';
+import HomeChart from './HomeChart';
 import HomePieChart from './HomePieChart';
 import '../App.css';
 
@@ -15,7 +15,7 @@ export default function App() {
                     <Tile />
                     <div className='ml-4 grid grid-cols-2 gap-2 mr-4'>
                         <div className='h-[60vh] w-full bg-white rounded-lg'>
-                        <ChartTest />
+                        <HomeChart/>
                         </div>
                         <HomePieChart/>
                     </div>

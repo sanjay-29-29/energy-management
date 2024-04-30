@@ -1,12 +1,22 @@
-import pandas as pd
 import numpy as np
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+import uvicorn
+import ngrok
+import pandas as pd
+import threading
+import ast
+from supabase import create_client, Client
+from statsmodels.tsa.arima.model import ARIMA
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
-# Allow CORS
+url = "https://foltrvqbdhiolcriszcb.supabase.co"
+key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvbHRydnFiZGhpb2xjcmlzemNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQzNzMwOTMsImV4cCI6MjAyOTk0OTA5M30.TSxl7-7Fgy_TJ_OXAJ_-KXU51S3sNPzb-XOSeeh3lmQ"
+supabase: Client = create_client(url, key)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,36 +25,54 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-electricity_df = pd.read_csv("data.csv")
-predicted_df = pd.read_csv("data_pred.csv")
+def run_server():
+    ngrok.set_auth_token("2dVBJw5G2bExzQ41keUUDtC0U8K_7zn55apnGM8YJ3RNsfznb")
+    listener = ngrok.forward("127.0.0.1:8000", authtoken_from_env=True, domain="glowing-polite-porpoise.ngrok-free.app")
+    uvicorn.run("api:app", host="127.0.0.1", port=8000)
 
-i = 10
+@app.post("/predict_energy")
+def predict():
+    response = supabase.table('totalenergycost').select("Date, Total").execute()
+    data = response.data
+    data = str(data)
+    data = data[1:-1]
+    data = ast.literal_eval(data)  
+    df = pd.DataFrame(data)
+    df['Date'] = pd.to_datetime(df['Date'])
+    df.set_index('Date', inplace=True)
+    model = ARIMA(df['Total'], order=(3,1,3))
+    model_fit = model.fit()
+    prediction = model_fit.forecast(steps=12)
+    prediction = prediction.round()
 
-@app.get("/")
-def get_data():
-    global i
-    i = 10
-    data = electricity_df.head(10).to_dict(orient='records')
-    return JSONResponse(content=data)
+    result_df = pd.DataFrame({
+        'Date': prediction.index.strftime('%Y-%m-%d'),
+         "Prediction" : prediction
+    })
+    result_df.reset_index(drop=True, inplace=True)
+    return JSONResponse(content=result_df.to_dict(orient="records"))
 
+@app.post("/predict_solar")
+def predict():
+    response = supabase.table('totalsolarcost').select("Date, Total").execute()
+    data = response.data
+    data = str(data)
+    data = data[1:-1]
+    data = ast.literal_eval(data)  
+    df = pd.DataFrame(data)
+    df['Date'] = pd.to_datetime(df['Date'])
+    df.set_index('Date', inplace=True)
+    model = ARIMA(df['Total'], order=(3,1,3))
+    model_fit = model.fit()
+    prediction = model_fit.forecast(steps=12)
+    prediction = prediction.round()
 
-@app.get("/get_next")
-def get_next():
-    global i
-    data = electricity_df.iloc[i].to_dict()
-    i += 1
-    return JSONResponse(content=data)
+    result_df = pd.DataFrame({
+        'Date': prediction.index.strftime('%Y-%m-%d'),
+         "Prediction" : prediction
+    })
+    result_df.reset_index(drop=True, inplace=True)
+    return JSONResponse(content=result_df.to_dict(orient="records"))
 
-
-@app.get("/get_total_energy")
-def get_predicited_energy():
-    data = predicted_df[['Time', 'Total']].to_dict(orient='records')
-    return JSONResponse(content=data)
-
-@app.get("/get_predicted_energy")
-def get_predicted_total():
-    data = predicted_df[['Actual']]
-    data = data.replace([np.inf, -np.inf], np.nan)
-    data = data.dropna()
-    data = data.to_dict(orient='records')
-    return data
+if __name__ == "__main__":
+    threading.Thread(target=run_server).start()

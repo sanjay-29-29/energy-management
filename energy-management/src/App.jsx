@@ -1,17 +1,19 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Home/Home';
-import { DataContext } from './DataContext';
+import Prediction from './Prediction/Prediction';
+import AuthProvider from './Context/AuthProvider';
+import AddData  from './Form/AddData';
 
 export default function App() {
-  const data = [];
   return (
-    <DataContext.Provider value={data}>
-      <Router>
+    <Router>
+      <AuthProvider>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/form" element={<AddData />} />
+          <Route path="/prediction" element={<Prediction />} />
         </Routes>
-      </Router>
-    </DataContext.Provider>
+      </AuthProvider>
+    </Router>
   );
 }
-

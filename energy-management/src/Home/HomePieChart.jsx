@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { registerLocale } from "react-datepicker";
 import enGB from 'date-fns/locale/en-GB';
-import { DataContext } from '../DataContext';
 import { Pie } from 'react-chartjs-2';
 import { supabase } from '../Database/db';
 import { format } from 'date-fns';
@@ -65,8 +64,6 @@ function HomePieChart() {
         }
         fetchData();
     }, [selectedTable, selectedDate]);
-
-    console.log(data);
 
     useEffect(() => {
         if (data && data.length > 0) {
