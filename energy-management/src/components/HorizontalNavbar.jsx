@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 import UserContext from '../Context/UserContext';
@@ -20,17 +20,17 @@ const HorizontalNavbar = () => {
 
     const handleLogin = async (event) => {
         event.preventDefault();
-    
+
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-    
+
         const { user, session, error } = await supabase.auth.signIn({
             email: 'example@email.com',
             password: 'example-password',
-          })
+        })
 
-          console.log(user, session, error)
-    
+        console.log(user, session, error)
+
         if (error) {
             console.error('Error: ', error.message);
             setErrorMessage('An error occurred. Please try again.');
@@ -53,9 +53,8 @@ const HorizontalNavbar = () => {
                         AI
                     </div>
                 </div>
-                <div className="text-black p-2">
-                    <button onClick={openModal}>Login</button>
-                </div>
+                <div className="text-black font-bold p-5 h-[5vh] transition-colors duration-300 hover:bg-gray-200 hover:text-gray-800">
+                    <button onClick={openModal}>Login</button>                </div>
             </div>
             <Modal
                 isOpen={modalIsOpen}

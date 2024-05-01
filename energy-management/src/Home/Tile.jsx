@@ -85,28 +85,28 @@ function TileBar() {
                 <div className='grid grid-cols-4 gap-5 m-4 ml-10 mr-10 h-[20vh] w-[98%]'>
                     <div className='bg-tilebox h-full bg-white rounded-lg'>
                         <div className='flex flex-col justify-center'>
-                            <div className='m-2 text-xs font-bold'>TOTAL ENERGY COST</div>
-                            <div className='text-center m-2 text-4xl'>Rs. {calculateElectricityBill(EnergyUnit)}</div>
+                           <div className='m-2 text-xs font-bold '>TOTAL ENERGY COST</div>
+                           <span><div className='text-center m-2 text-4xl mt-10'>Rs. {calculateElectricityBill(EnergyUnit)}</div></span>
                         </div>
                     </div>
                     <div className='bg-tilebox h-full bg-white rounded-lg'>
                         <div className='flex flex-col justify-center'>
                             <div className='m-2 text-xs font-bold'>TOTAL ENERGY UNIT PER DAY</div>
-                            <span><div className='text-center m-2 text-4xl'>{EnergyUnit}</div>
+                            <span><div className='text-center mt-10 text-4xl'>{EnergyUnit}</div>
                             <div className='text-center m-2 text-2xl'>KW/Hr</div></span>
                         </div>
                     </div>
                     <div className='bg-tilebox h-full bg-white rounded-lg'>
                         <div className='flex flex-col justify-center'>
                             <div className='m-2 text-xs font-bold'>AVERAGE ENERGY USAGE</div>
-                            <span><div className='text-center m-2 text-4xl'>{EnergyUnitAvg}</div>
+                            <span><div className='text-center mt-10 text-4xl'>{EnergyUnitAvg}</div>
                             <div className='text-center m-2 text-2xl'>KW/Hr</div></span>
                         </div>
                     </div>
                     <div className='bg-tilebox h-full bg-white rounded-lg'>
                         <div className='flex flex-col justify-center'>
                             <div className='m-2 text-xs font-bold'>TOTAL SOLAR PRODUCTION</div>
-                            <span><div className='text-center m-2 text-4xl'>{solarProduction}</div>
+                            <span><div className='text-center mt-10 text-4xl'>{solarProduction}</div>
                             <div className='text-center m-2 text-2xl'>KW/Hr</div></span>
                         </div>
                     </div>
