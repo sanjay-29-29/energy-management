@@ -13,10 +13,10 @@ export default function App() {
                 <div className="flex flex-col w-full overflow-y-auto">
                     <HorizontalNavbar />
                     <Tile />
-                    <div className='ml-4 grid grid-cols-2 gap-2 mr-4'>
-                        <div className='h-[60vh] w-full bg-white rounded-lg'>
+                    <div className='ml-6 grid grid-cols-2 gap-2 mr-4 mt-4'>
+                    <div className='h-[60vh] w-full bg-white rounded-lg'>
                         <HomeChart/>
-                        </div>
+                    </div>
                         <HomePieChart/>
                     </div>
                 </div>

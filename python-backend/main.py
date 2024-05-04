@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import uvicorn
-import ngrok
 import pandas as pd
 import threading
 import pandas as pd
@@ -27,9 +26,6 @@ app.add_middleware(
 url = "https://foltrvqbdhiolcriszcb.supabase.co"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvbHRydnFiZGhpb2xjcmlzemNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQzNzMwOTMsImV4cCI6MjAyOTk0OTA5M30.TSxl7-7Fgy_TJ_OXAJ_-KXU51S3sNPzb-XOSeeh3lmQ"
 supabase: Client = create_client(url, key)
-
-ngrok.set_auth_token("2dVBJw5G2bExzQ41keUUDtC0U8K_7zn55apnGM8YJ3RNsfznb")
-listener = ngrok.forward("127.0.0.1:8000", authtoken_from_env=True, domain="glowing-polite-porpoise.ngrok-free.app")
 
 @app.post("/predict_energy")
 def predict():

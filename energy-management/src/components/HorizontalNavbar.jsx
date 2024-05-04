@@ -39,7 +39,7 @@ const HorizontalNavbar = () => {
 
     return (
         <>
-            <div className="flex flex-container h-[5vh] bg-white items-center font-roboto  justify-between">
+            <div className="flex flex-container h-[5vh] bg-white items-center font-roboto justify-between">
                 <div className="flex">
                     <div className="text-3xl font-bold text-green-500 ">
                         Green
@@ -48,15 +48,15 @@ const HorizontalNavbar = () => {
                         AI
                     </div>
                 </div>
-                <div className="text-black font-bold h-[5vh] transition-colors duration-300">
+                <div className="text-black font-bold transition-colors duration-300">
                     {isAuthenticated ? (
                         <>
-                            <span className='p-4'>{user.username}</span>
-                            <button className='p-4 h-[5vh] hover:bg-gray-200 hover:text-gray-800' onClick={logout}> Logout</button>
+                            <span className='mr-2'>{user.username}</span>
+                            <button className='h-[5vh] pl-4 pr-4  hover:bg-gray-200 hover:text-gray-800' onClick={logout}> Logout</button>
 
                         </>
                     ) : (
-                        <button className='p-4 h-[5vh] hover:bg-gray-200 hover:text-gray-800' onClick={openModal}>Login</button>
+                        <button className='h-[5vh] pl-4 pr-4 hover:bg-gray-200 hover:text-gray-800' onClick={openModal}>Login</button>
                     )}
                 </div>
             </div>

@@ -28,7 +28,7 @@ function PredictionChart() {
     const [PredictionDatatAvgWeek, setPredcitonDataAvgWeek] = useState(0);
 
     useEffect(() => {
-        let url = 'https://glowing-polite-porpoise.ngrok-free.app/';
+        let url = 'https://076rd6w8mg.execute-api.ap-south-1.amazonaws.com/';
         url += selectedOption === 'energy' ? 'predict_energy' : 'predict_solar';
 
         axios.post(url)
@@ -143,11 +143,10 @@ function PredictionChart() {
                 </div>
             </div>
             <div className='flex flex-row'>
-                <div className='bg-tilebox bg-white rounded-lg h-[20vh] m-4 w-[20vw]'>
-                    <div className='flex flex-col justify-center '>
+                <div className='bg-tilebox bg-white rounded-lg h-[55vh] ml-6 mr-4 w-[20vw] overflow-y-auto'>
                         <div className='bg-tilebox bg-white rounded-lg'>
                             <div className='flex flex-col justify-center '>
-                                <table className='table-auto border border-1'>
+                                <table className='border border-1 overflow-y-auto rounded-lg'>
                                     <thead>
                                         <tr>
                                             <th className='px-4 py-2'>Date</th>
@@ -164,10 +163,9 @@ function PredictionChart() {
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
                     </div>
                 </div>
-                <div className='bg-tilebox bg-white rounded-lg h-[65vh] w-[50vw]'>
+                <div className='bg-tilebox bg-white rounded-lg h-[55vh] w-[50vw]'>
                     <div className='flex flex-col justify-center'>
                         <select value={selectedOption}
                             onChange={handleDropdownChange}

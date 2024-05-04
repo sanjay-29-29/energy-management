@@ -46,7 +46,22 @@ body {
   right: auto;
   bottom: auto;
   transform: translate(-50%, -50%);
-  height: 35vh;
+  height: 30vh; 
   width: 30vw;
+  overflow-y: auto;
   background: #fff;
+}
+
+/* For tablets */
+@media (max-width: 768px) {
+  .ReactModal__Content {
+    height: 50vh; /* adjust height for tablets */
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  .ReactModal__Content {
+    height: 70vh; /* adjust height for mobile phones */
+  }
 }
