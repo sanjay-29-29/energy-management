@@ -28,7 +28,7 @@ function PredictionChart() {
     const [PredictionDatatAvgWeek, setPredcitonDataAvgWeek] = useState(0);
 
     useEffect(() => {
-        let url = 'http://127.0.0.1:8000/';
+        let url = 'https://glowing-polite-porpoise.ngrok-free.app/';
         url += selectedOption === 'energy' ? 'predict_energy' : 'predict_solar';
 
         axios.post(url)
@@ -129,7 +129,7 @@ function PredictionChart() {
                         <div className='flex flex-col justify-center'>
                             <div className='m-2 text-xs font-bold'>TOTAL ENERGY COST</div>
                             <span className='flex flex-row justify-center items-ceter p-3'><div className='text-center m-2 text-4xl'>Rs.</div>
-                                <div className='text-center m-2 text-4xl'>{PredictionDatatAvgWeek}</div></span>
+                                <div className='text-center m-2 text-4xl'>{parseInt(PredictionDatatAvgWeek)}</div></span>
 
                         </div>
                     </div>
