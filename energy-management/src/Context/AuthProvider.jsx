@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import UserContext from "./UserContext";
+import AuthContext from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = (username, password) => {
+  const login = (username) => {
     setUser({ username });
     setIsAuthenticated(true);
   };
@@ -13,12 +15,13 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setIsAuthenticated(false);
+    navigate("/");
   };
 
   return (
-    <UserContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, setIsAuthenticated, login, logout }}>
       {children}
-    </UserContext.Provider>
+    </AuthContext.Provider>
   );
 };
 

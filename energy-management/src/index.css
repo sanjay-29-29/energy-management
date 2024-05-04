@@ -31,3 +31,22 @@ body {
 .react-datepicker__close-icon::after {
   background-color: #fff;
 }
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.ReactModal__Content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  height: 30vh;
+  width: 30vw;
+  background: #fff;
+}
