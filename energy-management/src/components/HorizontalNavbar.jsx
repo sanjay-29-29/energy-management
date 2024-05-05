@@ -8,7 +8,7 @@ import { width } from '@mui/system';
 const HorizontalNavbar = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const {user, isAuthenticated, setIsAuthenticated, login, logout } = useContext(AuthContext);
+    const { user, isAuthenticated, setIsAuthenticated, login, logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const openModal = () => {
@@ -61,21 +61,21 @@ const HorizontalNavbar = () => {
                 </div>
             </div>
             <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Login Modal"
-        className='ReactModal__Content border border-gray-300 rounded-lg p-4'
-      >
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Login Modal"
+                className='ReactModal__Content border border-gray-300 rounded-lg p-4 h-full w-full max-w-md max-h-96 overflow-auto'
+            >
                 <button onClick={closeModal} className="float-right p-2">X</button>
-                <p className="text-2xl font-bold mt-4 mb-6">Login</p>
+                <p className="text-2xl font-bold mb-2">Login</p>
                 <form className="flex flex-col" onSubmit={handleLogin}>
-                    <label htmlFor="username" className="mb-2">Username</label>
+                    <label htmlFor="username" className="mb-2">Email ID</label>
                     <input type="text" id="username" className="mb-4 p-2 border rounded" />
 
                     <label htmlFor="password" className="mb-2">Password</label>
                     <input type="password" id="password" className="mb-4 p-2 border rounded" />
 
-                    <button type="submit" className="p-2 bg-blue-500 text-white rounded">Login</button>
+                    <button type="submit" className="bg-blue-500 text-white rounded py-1">Login</button>
                     {errorMessage && <p>{errorMessage}</p>}
                 </form>
             </Modal>
