@@ -7,7 +7,7 @@ function SolarChart() {
     const [data, setData] = useState([]);
     const [labels, setLabels] = useState([]);
     const [energyCost, setEnergyCost] = useState([]);
-  
+    const  
     useEffect(() => {
       async function fetchData() {
         const today = '2024-04-26';

@@ -12,7 +12,16 @@ function HomeChart() {
 
   const [selectedInterval, setSelectedInterval] = useState('Past Week');
   const [selectedTable, setSelectedTable] = useState('Electricity');
-
+  const [chart_color, set_chart_color] = useState(['green','green']);
+  
+  useEffect(() => {
+    if (selectedTable === "Electricity") {
+      set_chart_color(["rgba(230, 230, 250, 0.2)", "#5D3FD3"]);
+    } else {
+      set_chart_color(["rgba(173, 216, 230, 0.2)","#89CFF0"]);
+    }
+  }, [selectedTable]);
+  
   const chartRef = useRef(null); 
 
   const TimeInterval = {
@@ -72,8 +81,8 @@ const data_chart = {
       label: 'Energy Usage(in kw/h)',
       data: energyCost,
       fill: true,
-      backgroundColor: 'rgba(173, 216, 230, 0.2)',
-      borderColor: '#89CFF0',
+      backgroundColor: chart_color[0],
+      borderColor: chart_color[1],
       tension: 0.1
     },
   ]
