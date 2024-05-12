@@ -20,7 +20,6 @@ function calculateElectricityBill(unitsConsumed) {
 function TileBar() {
     const [data_fetched, setData_fetched] = useState([]);
     const [EnergyUnit, setEnergyUnit] = useState(0);
-    const [EnergyCostDay, setEnergyCostDay] = useState(0);
     const [EnergyUnitAvg, setEnergyUnitAvg] = useState(0);
     const [solarProduction, setSolarProduction] = useState(0);
 
@@ -56,7 +55,7 @@ function TileBar() {
           }
 
         async function fetchSolar() {
-            const today = '2024-04-26';
+            const today = '4/26/2024';
             const { data: solar, error } = await supabase
                 .from('totalsolarcost')
                 .select('Total')

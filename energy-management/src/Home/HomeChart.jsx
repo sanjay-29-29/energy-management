@@ -35,7 +35,7 @@ function HomeChart() {
         .select('Date, Total')
         .gte('Date', TimeInterval[selectedInterval])
         .lte('Date', today);
-
+      console.log(totalenergy);
       if (chartRef.current) {
         chartRef.current.data.labels = labels;
         chartRef.current.data.datasets[0].data = data;
@@ -126,10 +126,11 @@ return (
             value={selectedInterval}
             onChange={(e) => setSelectedInterval(e.target.value)}
           >
-            <option value='Past Week'>Past Week</option>
-            <option value='Past 3 Months'>Past 3 Months</option>
-            <option value='Past Month'>Past Month</option>
-          </select>
+              <option value='Past Week'>Past Week</option>
+              <option value='Past Month'>Past Month</option> 
+              <option value='Past 3 Months'>Past 3 Months</option>
+          
+            </select>
         </div>
       </div>
       <Line ref={chartRef} data={data_chart} options={options} />

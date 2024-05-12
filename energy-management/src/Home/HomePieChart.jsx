@@ -39,12 +39,12 @@ function HomePieChart() {
 
     useEffect(() => {
         async function fetchData() {
-            const today = '2024-04-26';
+            let formattedDate = selectedDate;
 
             const { data: totalenergy, error } = await supabase
                 .from(Table[selectedTable])
                 .select('*')
-                .eq('Date', selectedDate);
+                .eq('Date', formattedDate);
 
             if (chartRef.current) {
                 chartRef.current.data.labels = labels;
@@ -132,8 +132,8 @@ function HomePieChart() {
                 </div>
                 <div className='flex rounded-lg items-center justify-center ml-[100px]'>
                     <div className='w-[55%] h-[55%] bg-white rounded-l'>
-                    <Pie ref={chartRef}
-                    data={data_chart} />
+                        <Pie ref={chartRef}
+                            data={data_chart} />
                     </div>
                 </div>
             </div>
